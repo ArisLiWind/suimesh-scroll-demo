@@ -96,33 +96,20 @@ main {
 
 .cover {
   min-height: 100vh;
-  padding: clamp(28px, 4vw, 58px);
+  padding: clamp(24px, 3.5vw, 48px);
 }
 
 .cover-card {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(1260px, 100%);
-  min-height: min(82vh, 880px);
+  width: min(1320px, 100%);
+  min-height: min(86vh, 920px);
   overflow: hidden;
-  border: 1px solid rgba(174, 207, 255, 0.2);
-  border-radius: 30px;
-  background: #020408;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.045),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 30px 90px rgba(0, 11, 34, 0.58);
-}
-
-.cover-card::before {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  z-index: 3;
-  border: 1px solid rgba(210, 230, 255, 0.14);
-  border-radius: 22px;
-  pointer-events: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .cover-art {
@@ -150,15 +137,16 @@ main {
   z-index: 2;
   display: grid;
   justify-items: center;
-  width: min(1040px, calc(100% - 72px));
+  width: min(1180px, calc(100% - 48px));
   text-align: center;
 }
 
 .cover-title {
-  font-size: clamp(76px, 11vw, 176px);
+  font-size: clamp(76px, 10vw, 164px);
   line-height: 0.88;
   font-weight: 800;
   letter-spacing: 0;
+  white-space: nowrap;
   text-shadow: 0 16px 50px rgba(0, 0, 0, 0.54);
 }
 
@@ -168,7 +156,7 @@ main {
   justify-content: center;
   width: min(680px, 92%);
   min-height: 78px;
-  margin-top: 34px;
+  margin-top: 24px;
   padding: 18px 28px;
   border: 1px solid rgba(235, 243, 255, 0.26);
   border-radius: 14px;
@@ -184,7 +172,7 @@ main {
 }
 
 .cover-link {
-  margin-top: clamp(90px, 13vh, 150px);
+  margin-top: clamp(90px, 13vh, 142px);
   color: rgba(247, 250, 255, 0.86);
   font-size: clamp(22px, 2.2vw, 34px);
   font-weight: 760;
@@ -278,15 +266,6 @@ h2 {
   padding-top: 120px;
 }
 
-.agent-cloud {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 74px;
-}
-
-.agent-cloud span,
 .actor,
 .fragment-grid div,
 .protocol-flow div {
@@ -296,30 +275,214 @@ h2 {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.agent-cloud span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 74px;
-  padding: 0 18px;
-  color: rgba(246, 249, 255, 0.86);
-  font-size: clamp(20px, 2vw, 28px);
-  opacity: 0;
-  transform: translateY(18px) scale(0.98);
-  animation: popIn 700ms ease forwards;
+.agent-rush {
+  min-height: min(100vh, 1060px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 72%, rgba(100, 200, 255, 0.08), transparent 36%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 10, 8, 0.16));
 }
 
-.agent-cloud span:nth-child(2) { animation-delay: 90ms; }
-.agent-cloud span:nth-child(3) { animation-delay: 180ms; }
-.agent-cloud span:nth-child(4) { animation-delay: 270ms; }
-.agent-cloud span:nth-child(5) { animation-delay: 360ms; }
-.agent-cloud span:nth-child(6) { animation-delay: 450ms; }
-.agent-cloud span:nth-child(7) { animation-delay: 540ms; }
-.agent-cloud span:nth-child(8) { animation-delay: 630ms; }
-.agent-cloud span:nth-child(9) { animation-delay: 720ms; }
-.agent-cloud span:nth-child(10) { animation-delay: 810ms; }
-.agent-cloud span:nth-child(11) { animation-delay: 900ms; }
-.agent-cloud span:nth-child(12) { animation-delay: 990ms; }
+.rush-stage {
+  position: relative;
+  width: min(1240px, 100%);
+  min-height: 720px;
+  padding: clamp(30px, 4vw, 58px);
+  perspective: 900px;
+}
+
+.rush-stage h2 {
+  max-width: 620px;
+  font-size: clamp(48px, 6vw, 88px);
+  position: relative;
+  z-index: 4;
+}
+
+.runway {
+  position: absolute;
+  left: 50%;
+  top: 130px;
+  width: min(760px, 70vw);
+  height: 620px;
+  transform: translateX(-50%) rotateX(58deg);
+  transform-origin: center top;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.runway::before,
+.runway::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(247, 253, 255, 0.88), rgba(255, 255, 255, 0));
+}
+
+.runway::before {
+  left: 12%;
+  transform: rotate(-16deg);
+}
+
+.runway::after {
+  right: 12%;
+  transform: rotate(16deg);
+}
+
+.runway span {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+}
+
+.runway span:first-child {
+  top: 34%;
+}
+
+.runway span:last-child {
+  top: 68%;
+}
+
+.agent-depth {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.agent-card {
+  position: absolute;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  color: #fbfff9;
+  font-weight: 850;
+  line-height: 0.9;
+  white-space: nowrap;
+  text-shadow: 0 10px 38px rgba(0, 0, 0, 0.66);
+  opacity: 0;
+  animation: rushForward 5.8s cubic-bezier(0.15, 0.86, 0.23, 1) infinite;
+}
+
+.agent-card b {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.depth-1 {
+  top: 34%;
+  font-size: clamp(28px, 3.2vw, 48px);
+  animation-delay: 0s;
+}
+
+.depth-2 {
+  top: 43%;
+  font-size: clamp(38px, 4.7vw, 70px);
+  animation-delay: 0.8s;
+}
+
+.depth-3 {
+  top: 53%;
+  font-size: clamp(52px, 6vw, 94px);
+  animation-delay: 1.6s;
+}
+
+.depth-4 {
+  top: 65%;
+  font-size: clamp(68px, 7.9vw, 122px);
+  animation-delay: 2.4s;
+}
+
+.depth-5 {
+  top: 79%;
+  font-size: clamp(82px, 9.8vw, 152px);
+  animation-delay: 3.2s;
+}
+
+.logo {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 0.86em;
+  height: 0.86em;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.08) 18%, transparent 34%),
+    rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 0 28px rgba(255, 255, 255, 0.12);
+}
+
+.logo::after {
+  color: #fff;
+  font-size: 0.36em;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.logo-chatgpt::before {
+  content: "";
+  width: 56%;
+  height: 56%;
+  border: 0.12em solid rgba(255, 255, 255, 0.88);
+  border-radius: 36% 64% 44% 56%;
+  transform: rotate(28deg);
+}
+
+.logo-claude::after {
+  content: "C";
+}
+
+.logo-openai::after {
+  content: "AI";
+  font-size: 0.3em;
+}
+
+.logo-enterprise {
+  border-radius: 22%;
+}
+
+.logo-enterprise::after {
+  content: "B";
+}
+
+.logo-wallet {
+  border-radius: 24%;
+}
+
+.logo-wallet::after {
+  content: "$";
+}
+
+.agent-field {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 14px;
+  width: min(940px, 88vw);
+  transform: translateX(-50%);
+  opacity: 0.38;
+}
+
+.agent-field span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: clamp(16px, 1.4vw, 24px);
+  font-weight: 760;
+}
 
 .split {
   display: grid;
@@ -558,6 +721,32 @@ h2 {
   }
 }
 
+@keyframes rushForward {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -90px, -520px) scale(0.22);
+    filter: blur(2.8px);
+  }
+  14% {
+    opacity: 0.36;
+  }
+  54% {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  78% {
+    opacity: 0.92;
+    transform: translate3d(-50%, 48px, 210px) scale(1.16);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, 120px, 460px) scale(1.44);
+    filter: blur(4px);
+  }
+}
+
 @keyframes pulseLine {
   0%, 100% { opacity: 0.32; transform: scaleX(0.74); }
   50% { opacity: 1; transform: scaleX(1); }
@@ -581,8 +770,7 @@ h2 {
   }
 
   .cover-card {
-    min-height: 74vh;
-    border-radius: 22px;
+    min-height: 76vh;
   }
 
   .cover-content {
@@ -590,7 +778,7 @@ h2 {
   }
 
   .cover-title {
-    font-size: clamp(56px, 15vw, 94px);
+    font-size: clamp(42px, 12vw, 76px);
   }
 
   .cover-badge {
@@ -600,7 +788,7 @@ h2 {
   }
 
   .cover-link {
-    margin-top: 72px;
+    margin-top: 64px;
   }
 
   .frame {
@@ -608,12 +796,49 @@ h2 {
     padding: 30px;
   }
 
-  .agent-cloud,
   .fragment-grid,
   .questions,
   .twin,
   .split {
     grid-template-columns: 1fr;
+  }
+
+  .rush-stage {
+    min-height: 680px;
+    padding: 24px 8px;
+  }
+
+  .rush-stage h2 {
+    max-width: 420px;
+  }
+
+  .runway {
+    width: 86vw;
+    top: 170px;
+  }
+
+  .agent-card {
+    gap: 12px;
+  }
+
+  .depth-1 {
+    font-size: clamp(22px, 8vw, 36px);
+  }
+
+  .depth-2 {
+    font-size: clamp(28px, 9.5vw, 44px);
+  }
+
+  .depth-3 {
+    font-size: clamp(34px, 11vw, 54px);
+  }
+
+  .depth-4 {
+    font-size: clamp(42px, 12vw, 62px);
+  }
+
+  .depth-5 {
+    font-size: clamp(46px, 13vw, 68px);
   }
 
   .actor-chain {
