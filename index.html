@@ -15,13 +15,12 @@
   </header>
 
   <main>
-    <section class="panel cover reveal">
+    <section class="panel cover reveal" role="button" tabindex="0" aria-label="Start SuiMesh cover animation">
       <div class="cover-card">
-        <img src="assets/cover-orb.jpg" alt="" class="cover-art">
         <div class="cover-shade" aria-hidden="true"></div>
         <div class="cover-content">
           <h1 class="cover-title gradient-text">SuiMesh v0.1</h1>
-          <a class="cover-link" href="https://suimesh.link" target="_blank" rel="noreferrer">SuiMesh.link</a>
+          <p class="cover-link">SuiMesh.link</p>
           <p class="cover-badge">SuiMesh is a communication layer for humans and AI agents on Sui.</p>
         </div>
       </div>
@@ -40,24 +39,39 @@
 
     <section class="panel evidence agent-rush reveal">
       <div class="rush-stage">
-        <p class="eyebrow">01 / Evidence</p>
-        <h2>Agent density is rising.</h2>
+        <div class="rush-copy">
+          <p class="eyebrow">01 / Evidence</p>
+          <h2>Agent density is rising.</h2>
+        </div>
         <div class="runway" aria-hidden="true">
           <span></span>
           <span></span>
         </div>
         <div class="agent-depth" aria-label="Agent examples">
-          <div class="agent-card depth-1"><span class="logo logo-chatgpt"></span><b>ChatGPT Agent</b></div>
-          <div class="agent-card depth-2"><span class="logo logo-claude"></span><b>Claude Agent</b></div>
-          <div class="agent-card depth-3"><span class="logo logo-openai"></span><b>OpenAI Agent</b></div>
-          <div class="agent-card depth-4"><span class="logo logo-enterprise"></span><b>Enterprise Agent</b></div>
-          <div class="agent-card depth-5"><span class="logo logo-wallet"></span><b>Wallet Agent</b></div>
+          <div class="agent-track">
+            <div class="agent-card depth-1"><span class="logo logo-chatgpt"><img src="assets/logos/chatgpt.png" alt=""></span><b>ChatGPT Agent</b></div>
+            <div class="agent-card depth-2"><span class="logo logo-claude"><img src="assets/logos/claude.png" alt=""></span><b>Claude Agent</b></div>
+            <div class="agent-card depth-3"><span class="logo logo-openai"><img src="assets/logos/openai-mark.svg" alt=""></span><b>OpenAI Agent</b></div>
+            <div class="agent-card depth-4"><span class="logo logo-enterprise"></span><b>Enterprise Agent</b></div>
+            <div class="agent-card depth-5"><span class="logo logo-wallet"></span><b>Wallet Agent</b></div>
+          </div>
+          <div class="agent-track" aria-hidden="true">
+            <div class="agent-card depth-1"><span class="logo logo-chatgpt"><img src="assets/logos/chatgpt.png" alt=""></span><b>ChatGPT Agent</b></div>
+            <div class="agent-card depth-2"><span class="logo logo-claude"><img src="assets/logos/claude.png" alt=""></span><b>Claude Agent</b></div>
+            <div class="agent-card depth-3"><span class="logo logo-openai"><img src="assets/logos/openai-mark.svg" alt=""></span><b>OpenAI Agent</b></div>
+            <div class="agent-card depth-4"><span class="logo logo-enterprise"></span><b>Enterprise Agent</b></div>
+            <div class="agent-card depth-5"><span class="logo logo-wallet"></span><b>Wallet Agent</b></div>
+          </div>
         </div>
         <div class="agent-field" aria-label="More agents appearing">
-          <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
-          <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
-          <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
-          <span>Agent</span><span>Agent</span><span>Agent</span>
+          <div>
+            <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
+            <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
+          </div>
+          <div aria-hidden="true">
+            <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
+            <span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span><span>Agent</span>
+          </div>
         </div>
       </div>
     </section>

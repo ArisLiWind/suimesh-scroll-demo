@@ -1,11 +1,16 @@
 const progress = document.querySelector(".progress span");
 const reveals = document.querySelectorAll(".reveal");
+const cover = document.querySelector(".cover");
+const agentRush = document.querySelector(".agent-rush");
 
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
+        if (entry.target === agentRush) {
+          agentRush.classList.add("is-running");
+        }
       }
     });
   },
@@ -27,3 +32,16 @@ function updateProgress() {
 window.addEventListener("scroll", updateProgress, { passive: true });
 window.addEventListener("resize", updateProgress);
 updateProgress();
+
+function startCover() {
+  if (!cover || cover.classList.contains("cover-started")) return;
+  cover.classList.add("cover-started");
+}
+
+cover?.addEventListener("click", startCover);
+cover?.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    startCover();
+  }
+});

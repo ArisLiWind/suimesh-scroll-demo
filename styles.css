@@ -97,6 +97,8 @@ main {
 .cover {
   min-height: 100vh;
   padding: clamp(24px, 3.5vw, 48px);
+  cursor: pointer;
+  outline: none;
 }
 
 .cover-card {
@@ -108,19 +110,11 @@ main {
   overflow: hidden;
   border: 0;
   border-radius: 0;
-  background: transparent;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(175, 191, 214, 0.11), transparent 17%),
+    radial-gradient(circle at 50% 52%, rgba(77, 151, 255, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 42%, rgba(255, 255, 255, 0.015));
   box-shadow: none;
-}
-
-.cover-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.88;
-  filter: saturate(1.04) contrast(1.06);
-  transform: scale(1.02);
 }
 
 .cover-shade {
@@ -128,8 +122,9 @@ main {
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(circle at 50% 47%, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.72) 64%, rgba(0, 0, 0, 0.94) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.1) 48%, rgba(0, 0, 0, 0.52));
+    linear-gradient(90deg, transparent 0 49.8%, rgba(255, 255, 255, 0.06) 50%, transparent 50.2%),
+    radial-gradient(circle at 50% 48%, transparent 0 24%, rgba(0, 0, 0, 0.74) 55%, #000 84%);
+  opacity: 0.78;
 }
 
 .cover-content {
@@ -148,6 +143,9 @@ main {
   letter-spacing: 0;
   white-space: nowrap;
   text-shadow: 0 16px 50px rgba(0, 0, 0, 0.54);
+  opacity: 0;
+  transform: scale(1.85);
+  filter: blur(8px);
 }
 
 .cover-badge {
@@ -169,6 +167,8 @@ main {
   font-weight: 700;
   line-height: 1.35;
   text-transform: none;
+  opacity: 0;
+  transform: translateY(18px);
 }
 
 .cover-link {
@@ -178,6 +178,21 @@ main {
   font-weight: 760;
   text-decoration: none;
   text-shadow: 0 0 26px rgba(100, 200, 255, 0.2);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+}
+
+.cover.cover-started .cover-title {
+  animation: coverTitleLand 950ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cover.cover-started .cover-link {
+  animation: coverRevealUp 560ms ease 900ms forwards;
+}
+
+.cover.cover-started .cover-badge {
+  animation: coverRevealUp 620ms ease 1380ms forwards;
 }
 
 .frame {
@@ -279,7 +294,7 @@ h2 {
   min-height: min(100vh, 1060px);
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 72%, rgba(100, 200, 255, 0.08), transparent 36%),
+    radial-gradient(circle at 50% 70%, rgba(88, 151, 255, 0.11), transparent 32%),
     linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 10, 8, 0.16));
 }
 
@@ -288,25 +303,38 @@ h2 {
   width: min(1240px, 100%);
   min-height: 720px;
   padding: clamp(30px, 4vw, 58px);
-  perspective: 900px;
+  perspective: 760px;
 }
 
-.rush-stage h2 {
-  max-width: 620px;
-  font-size: clamp(48px, 6vw, 88px);
+.rush-copy {
   position: relative;
-  z-index: 4;
+  z-index: 6;
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  margin-top: -18px;
+  white-space: nowrap;
+}
+
+.rush-copy .eyebrow {
+  margin: 0;
+}
+
+.rush-copy h2 {
+  margin: 0;
+  font-size: clamp(30px, 4.2vw, 60px);
+  line-height: 0.96;
 }
 
 .runway {
   position: absolute;
   left: 50%;
-  top: 130px;
-  width: min(760px, 70vw);
-  height: 620px;
-  transform: translateX(-50%) rotateX(58deg);
+  top: 80px;
+  width: min(1180px, 96vw);
+  height: 760px;
+  transform: translateX(-50%) rotateX(66deg);
   transform-origin: center top;
-  opacity: 0.72;
+  opacity: 0.64;
   pointer-events: none;
 }
 
@@ -321,13 +349,15 @@ h2 {
 }
 
 .runway::before {
-  left: 12%;
-  transform: rotate(-16deg);
+  left: -16%;
+  transform: rotate(43deg);
+  transform-origin: top center;
 }
 
 .runway::after {
-  right: 12%;
-  transform: rotate(16deg);
+  right: -16%;
+  transform: rotate(-43deg);
+  transform-origin: top center;
 }
 
 .runway span {
@@ -348,25 +378,53 @@ h2 {
 
 .agent-depth {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 188px;
+  bottom: 34px;
   z-index: 3;
+  overflow: hidden;
   transform-style: preserve-3d;
   pointer-events: none;
+  mask-image: linear-gradient(180deg, transparent, #000 13%, #000 75%, transparent 100%);
+}
+
+.agent-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -620px;
+  height: 620px;
+  transform: translateY(0);
+}
+
+.agent-track + .agent-track {
+  top: 0;
+}
+
+.agent-rush.is-running .agent-track {
+  animation: ladderFlow 13s linear infinite;
 }
 
 .agent-card {
   position: absolute;
   left: 50%;
+  top: var(--top);
   display: inline-flex;
   align-items: center;
-  gap: 18px;
+  gap: clamp(12px, 1.4vw, 22px);
   color: #fbfff9;
   font-weight: 850;
   line-height: 0.9;
   white-space: nowrap;
-  text-shadow: 0 10px 38px rgba(0, 0, 0, 0.66);
-  opacity: 0;
-  animation: rushForward 5.8s cubic-bezier(0.15, 0.86, 0.23, 1) infinite;
+  text-shadow:
+    0 0 22px rgba(108, 164, 255, 0.28),
+    0 12px 38px rgba(0, 0, 0, 0.72);
+  transform:
+    translate3d(calc(-50% + var(--x)), 0, 0)
+    skewX(-7deg);
+  opacity: var(--opacity);
+  filter: blur(var(--blur));
 }
 
 .agent-card b {
@@ -375,33 +433,43 @@ h2 {
 }
 
 .depth-1 {
-  top: 34%;
-  font-size: clamp(28px, 3.2vw, 48px);
-  animation-delay: 0s;
+  --top: 0px;
+  --x: 10px;
+  --opacity: 0.28;
+  --blur: 5px;
+  font-size: clamp(28px, 3.2vw, 46px);
 }
 
 .depth-2 {
-  top: 43%;
-  font-size: clamp(38px, 4.7vw, 70px);
-  animation-delay: 0.8s;
+  --top: 92px;
+  --x: -62px;
+  --opacity: 0.58;
+  --blur: 2.6px;
+  font-size: clamp(38px, 4.6vw, 68px);
 }
 
 .depth-3 {
-  top: 53%;
-  font-size: clamp(52px, 6vw, 94px);
-  animation-delay: 1.6s;
+  --top: 198px;
+  --x: 12px;
+  --opacity: 0.94;
+  --blur: 0px;
+  font-size: clamp(52px, 6.2vw, 92px);
 }
 
 .depth-4 {
-  top: 65%;
-  font-size: clamp(68px, 7.9vw, 122px);
-  animation-delay: 2.4s;
+  --top: 318px;
+  --x: -84px;
+  --opacity: 0.82;
+  --blur: 1px;
+  font-size: clamp(66px, 8vw, 118px);
 }
 
 .depth-5 {
-  top: 79%;
-  font-size: clamp(82px, 9.8vw, 152px);
-  animation-delay: 3.2s;
+  --top: 456px;
+  --x: 36px;
+  --opacity: 0.9;
+  --blur: 0.8px;
+  font-size: clamp(78px, 9.6vw, 142px);
 }
 
 .logo {
@@ -421,6 +489,7 @@ h2 {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.34),
     0 0 28px rgba(255, 255, 255, 0.12);
+  overflow: hidden;
 }
 
 .logo::after {
@@ -430,7 +499,19 @@ h2 {
   line-height: 1;
 }
 
-.logo-chatgpt::before {
+.logo img {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: grayscale(1) brightness(1.8) contrast(1.1);
+}
+
+.logo-claude img {
+  filter: saturate(0.85) brightness(1.25) contrast(1.08);
+}
+
+.logo-chatgpt:not(:has(img))::before {
   content: "";
   width: 56%;
   height: 56%;
@@ -439,11 +520,11 @@ h2 {
   transform: rotate(28deg);
 }
 
-.logo-claude::after {
+.logo-claude:not(:has(img))::after {
   content: "C";
 }
 
-.logo-openai::after {
+.logo-openai:not(:has(img))::after {
   content: "AI";
   font-size: 0.3em;
 }
@@ -470,12 +551,23 @@ h2 {
   bottom: 18px;
   z-index: 2;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px 14px;
-  width: min(940px, 88vw);
-  transform: translateX(-50%);
-  opacity: 0.38;
+  width: min(980px, 86vw);
+  overflow: hidden;
+  transform: translateX(-50%) skewX(-7deg);
+  opacity: 0.42;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.agent-field div {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  padding-right: 12px;
+  transform: translateX(0);
+}
+
+.agent-rush.is-running .agent-field div {
+  animation: agentTicker 16s linear infinite;
 }
 
 .agent-field span {
@@ -714,6 +806,31 @@ h2 {
   50% { transform: translate3d(0, -22px, 0) rotate(2deg) scale(1.03); }
 }
 
+@keyframes coverTitleLand {
+  0% {
+    opacity: 0;
+    transform: scale(2.15);
+    filter: blur(12px);
+  }
+  38% {
+    opacity: 1;
+    transform: scale(1.42);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes coverRevealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes popIn {
   to {
     opacity: 1;
@@ -721,29 +838,30 @@ h2 {
   }
 }
 
-@keyframes rushForward {
-  0% {
-    opacity: 0;
-    transform: translate3d(-50%, -90px, -520px) scale(0.22);
-    filter: blur(2.8px);
+@keyframes ladderFlow {
+  from {
+    transform: translateY(0);
   }
-  14% {
-    opacity: 0.36;
+  to {
+    transform: translateY(620px);
   }
-  54% {
-    opacity: 1;
-    transform: translate3d(-50%, 0, 0) scale(1);
-    filter: blur(0);
+}
+
+@keyframes agentTicker {
+  from {
+    transform: translateX(0);
   }
-  78% {
-    opacity: 0.92;
-    transform: translate3d(-50%, 48px, 210px) scale(1.16);
-    filter: blur(0);
+  to {
+    transform: translateX(calc(-100% - 12px));
   }
-  100% {
-    opacity: 0;
-    transform: translate3d(-50%, 120px, 460px) scale(1.44);
-    filter: blur(4px);
+}
+
+@keyframes ladderFlowMobile {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(520px);
   }
 }
 
@@ -808,36 +926,82 @@ h2 {
     padding: 24px 8px;
   }
 
-  .rush-stage h2 {
-    max-width: 420px;
+  .rush-copy {
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 0;
+    transform: translateX(6px);
+  }
+
+  .rush-copy h2 {
+    font-size: clamp(26px, 8vw, 42px);
   }
 
   .runway {
-    width: 86vw;
-    top: 170px;
+    width: 108vw;
+    top: 118px;
+    height: 620px;
+  }
+
+  .runway::before {
+    left: -18%;
+    transform: rotate(42deg);
+  }
+
+  .runway::after {
+    right: -18%;
+    transform: rotate(-42deg);
   }
 
   .agent-card {
     gap: 12px;
   }
 
+  .agent-depth {
+    top: 186px;
+    bottom: 46px;
+  }
+
+  .agent-track {
+    top: -520px;
+    height: 520px;
+  }
+
+  .agent-track + .agent-track {
+    top: 0;
+  }
+
+  .agent-rush.is-running .agent-track {
+    animation-name: ladderFlowMobile;
+  }
+
   .depth-1 {
+    --top: 0px;
+    --x: 4px;
     font-size: clamp(22px, 8vw, 36px);
   }
 
   .depth-2 {
+    --top: 76px;
+    --x: -26px;
     font-size: clamp(28px, 9.5vw, 44px);
   }
 
   .depth-3 {
+    --top: 164px;
+    --x: 8px;
     font-size: clamp(34px, 11vw, 54px);
   }
 
   .depth-4 {
+    --top: 264px;
+    --x: -34px;
     font-size: clamp(42px, 12vw, 62px);
   }
 
   .depth-5 {
+    --top: 374px;
+    --x: 12px;
     font-size: clamp(46px, 13vw, 68px);
   }
 
