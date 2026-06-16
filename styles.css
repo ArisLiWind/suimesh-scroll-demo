@@ -154,7 +154,7 @@ main {
   justify-content: center;
   width: min(680px, 92%);
   min-height: 78px;
-  margin-top: 24px;
+  margin-top: 26px;
   padding: 18px 28px;
   border: 1px solid rgba(235, 243, 255, 0.26);
   border-radius: 14px;
@@ -172,7 +172,7 @@ main {
 }
 
 .cover-link {
-  margin-top: clamp(90px, 13vh, 142px);
+  margin-top: 28px;
   color: rgba(247, 250, 255, 0.86);
   font-size: clamp(22px, 2.2vw, 34px);
   font-weight: 760;
@@ -188,11 +188,11 @@ main {
 }
 
 .cover.cover-started .cover-link {
-  animation: coverRevealUp 560ms ease 900ms forwards;
+  animation: coverRevealUp 560ms ease 1380ms forwards;
 }
 
 .cover.cover-started .cover-badge {
-  animation: coverRevealUp 620ms ease 1380ms forwards;
+  animation: coverRevealUp 620ms ease 900ms forwards;
 }
 
 .frame {
@@ -279,6 +279,81 @@ h2 {
   z-index: 2;
   width: min(1180px, 100%);
   padding-top: 120px;
+}
+
+.news-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.92fr;
+  gap: 14px;
+  width: min(980px, calc(100vw - 96px));
+  margin-top: clamp(46px, 7vh, 78px);
+  padding: 18px;
+  border: 1px solid rgba(235, 240, 245, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    rgba(0, 0, 0, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 24px 80px rgba(0, 0, 0, 0.38);
+}
+
+.news-card {
+  min-height: 118px;
+  padding: 18px 20px;
+  border: 1px solid rgba(10, 10, 10, 0.24);
+  color: #101318;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(#f8f7f0, #e7e3d8);
+  background-size: 10px 10px, auto;
+  transform: rotate(var(--tilt, -1.2deg));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.44);
+}
+
+.news-card:nth-child(2) {
+  --tilt: 1.8deg;
+}
+
+.news-card:nth-child(3) {
+  --tilt: -2.2deg;
+  grid-column: 2;
+}
+
+.news-lead {
+  grid-row: span 2;
+  min-height: 250px;
+  background:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.05) 44%),
+    radial-gradient(circle at 72% 20%, rgba(118, 255, 17, 0.45), transparent 20%),
+    linear-gradient(135deg, #0b0d0a, #171b13 58%, #050605);
+  color: #f7faf5;
+}
+
+.news-card span {
+  display: block;
+  margin-bottom: 12px;
+  color: currentColor;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.66;
+}
+
+.news-card b {
+  display: block;
+  max-width: 720px;
+  font-size: clamp(24px, 3vw, 48px);
+  line-height: 0.96;
+}
+
+.news-card p {
+  max-width: 540px;
+  margin-top: 18px;
+  color: currentColor;
+  font-size: clamp(14px, 1.15vw, 18px);
+  font-weight: 680;
+  line-height: 1.36;
+  opacity: 0.74;
 }
 
 .actor,
@@ -393,8 +468,8 @@ h2 {
   position: absolute;
   left: 0;
   right: 0;
-  top: -620px;
-  height: 620px;
+  top: -2460px;
+  height: 2460px;
   transform: translateY(0);
 }
 
@@ -403,7 +478,7 @@ h2 {
 }
 
 .agent-rush.is-running .agent-track {
-  animation: ladderFlow 13s linear infinite;
+  animation: ladderFlow 7.5s linear infinite;
 }
 
 .agent-card {
@@ -422,9 +497,12 @@ h2 {
     0 12px 38px rgba(0, 0, 0, 0.72);
   transform:
     translate3d(calc(-50% + var(--x)), 0, 0)
-    skewX(-7deg);
-  opacity: var(--opacity);
-  filter: blur(var(--blur));
+    skewX(-7deg)
+    scale(var(--flow-scale, 1));
+  transform-origin: center center;
+  opacity: var(--flow-opacity, var(--opacity));
+  filter: blur(var(--flow-blur, var(--blur)));
+  font-size: clamp(30px, 5.2vw, 88px);
 }
 
 .agent-card b {
@@ -481,34 +559,34 @@ h2 {
   height: 0.86em;
   min-width: 30px;
   min-height: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.42);
+  padding: 0.12em;
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.08) 18%, transparent 34%),
-    rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, #ffffff, #dfe5ec);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.34),
-    0 0 28px rgba(255, 255, 255, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    0 0 28px rgba(170, 205, 255, 0.26);
   overflow: hidden;
 }
 
 .logo::after {
-  color: #fff;
+  content: attr(data-mark);
+  color: #111827;
   font-size: 0.36em;
   font-weight: 850;
   line-height: 1;
 }
 
 .logo img {
-  width: 72%;
-  height: 72%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: 50%;
-  filter: grayscale(1) brightness(1.8) contrast(1.1);
+  filter: none;
 }
 
 .logo-claude img {
-  filter: saturate(0.85) brightness(1.25) contrast(1.08);
+  filter: none;
 }
 
 .logo-chatgpt:not(:has(img))::before {
@@ -521,11 +599,11 @@ h2 {
 }
 
 .logo-claude:not(:has(img))::after {
-  content: "C";
+  content: "A";
 }
 
 .logo-openai:not(:has(img))::after {
-  content: "AI";
+  content: "O";
   font-size: 0.3em;
 }
 
@@ -567,7 +645,7 @@ h2 {
 }
 
 .agent-rush.is-running .agent-field div {
-  animation: agentTicker 16s linear infinite;
+  animation: agentTicker 8s linear infinite;
 }
 
 .agent-field span {
@@ -843,7 +921,7 @@ h2 {
     transform: translateY(0);
   }
   to {
-    transform: translateY(620px);
+    transform: translateY(2460px);
   }
 }
 
@@ -963,46 +1041,16 @@ h2 {
   }
 
   .agent-track {
-    top: -520px;
-    height: 520px;
+    top: -2460px;
+    height: 2460px;
   }
 
   .agent-track + .agent-track {
     top: 0;
   }
 
-  .agent-rush.is-running .agent-track {
-    animation-name: ladderFlowMobile;
-  }
-
-  .depth-1 {
-    --top: 0px;
-    --x: 4px;
-    font-size: clamp(22px, 8vw, 36px);
-  }
-
-  .depth-2 {
-    --top: 76px;
-    --x: -26px;
-    font-size: clamp(28px, 9.5vw, 44px);
-  }
-
-  .depth-3 {
-    --top: 164px;
-    --x: 8px;
-    font-size: clamp(34px, 11vw, 54px);
-  }
-
-  .depth-4 {
-    --top: 264px;
-    --x: -34px;
-    font-size: clamp(42px, 12vw, 62px);
-  }
-
-  .depth-5 {
-    --top: 374px;
-    --x: 12px;
-    font-size: clamp(46px, 13vw, 68px);
+  .agent-card {
+    font-size: clamp(24px, 8vw, 56px);
   }
 
   .actor-chain {
