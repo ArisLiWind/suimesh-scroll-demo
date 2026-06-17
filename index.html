@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SuiMesh Scroll Demo</title>
-  <meta name="description" content="A scroll-driven presentation for SuiMesh: own the context, verify the action.">
+  <title>SuiMesh Scroll Narrative</title>
+  <meta name="description" content="A scroll-driven SuiMesh narrative about the missing communication layer for agent actions.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
+
   <header class="topbar">
-    <img src="assets/brand-lockup.png" alt="SuiMesh" class="brand">
+    <img src="assets/suimesh-symbol-clean.png" alt="SuiMesh" class="brand brand-symbol">
     <div class="progress" aria-hidden="true"><span></span></div>
   </header>
 
@@ -21,184 +22,187 @@
       </div>
     </section>
 
-    <section class="panel cover reveal" role="button" tabindex="0" aria-label="Start SuiMesh cover animation">
-      <div class="cover-card">
-        <div class="cover-shade" aria-hidden="true"></div>
-        <div class="cover-content">
-          <h1 class="cover-title gradient-text">SuiMesh v0.1</h1>
-          <p class="cover-badge">SuiMesh is a communication layer for humans and AI agents on Sui.</p>
-          <p class="cover-link">SuiMesh.link</p>
-        </div>
+    <section class="panel narrative-panel title-slide dark-slide reveal" aria-label="The Next Communication Layer">
+      <img src="assets/suimesh-symbol-clean.png" alt="SuiMesh symbol" class="slide-symbol">
+      <h1 class="type-line" data-text="The Next Communication Layer"></h1>
+      <p class="type-line" data-text="Own the Context. Verify the Action."></p>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="Opening thesis">
+      <h1 class="type-line" data-text="The Internet connected computers. Blockchains connected value."></h1>
+      <p class="type-line" data-text="Today, agents are becoming actors. A new communication problem is emerging."></p>
+    </section>
+
+    <section class="panel narrative-panel timeline-slide reveal" aria-label="Every revolution creates a new communication need">
+      <h1 class="type-line" data-text="Every revolution creates a new communication need."></h1>
+      <div class="timeline-track" aria-hidden="true">
+        <span><b>1996</b><i>Internet</i></span>
+        <span><b>2006</b><i>Mobile</i></span>
+        <span><b>2016</b><i>Cloud</i></span>
+        <span><b>2020</b><i>AI</i></span>
+        <span><b>2025</b><i>Agent</i></span>
+        <span><b>2026+</b><i>Agent Economy</i></span>
       </div>
     </section>
 
-    <section class="panel hero reveal">
-      <div class="orb-wrap" aria-hidden="true">
-        <img src="assets/hero-flower-hd.png" alt="" class="hero-orb">
-      </div>
-      <div class="hero-copy">
-        <p class="eyebrow">SuiMesh narrative demo</p>
-        <h1 class="mega gradient-text">Agents are becoming actors.</h1>
-        <p class="subline">Evidence first. Product second.</p>
-        <div class="news-board" aria-label="Recent agent news references">
-          <article class="news-card news-lead">
-            <span>NVIDIA GTC 2026 Keynote</span>
-            <b>Agents Go To Work</b>
-            <p>Jensen Huang frames the next wave of AI around agents entering real workflows.</p>
-          </article>
-          <article class="news-card">
-            <span>Enterprise AI</span>
-            <b>Agent platforms move from demos to deployment</b>
-            <p>Tools are shifting from chat interfaces into operational actors.</p>
-          </article>
-          <article class="news-card">
-            <span>Developer Tools</span>
-            <b>Coding agents become daily infrastructure</b>
-            <p>IDE copilots, CLI agents, and autonomous coding systems expand in parallel.</p>
-          </article>
-        </div>
+    <section class="panel narrative-panel year-detail reveal" aria-label="1996 Internet">
+      <h1 class="type-line" data-text="1996. Internet."></h1>
+      <p class="type-line" data-text="Computers needed a common way to exchange packets, addresses, and state across networks."></p>
+    </section>
+
+    <section class="panel narrative-panel year-detail reveal" aria-label="2006 Mobile">
+      <h1 class="type-line" data-text="2006. Mobile."></h1>
+      <p class="type-line" data-text="People became always online, so communication moved from places to identities and devices."></p>
+    </section>
+
+    <section class="panel narrative-panel year-detail reveal" aria-label="2016 Cloud">
+      <h1 class="type-line" data-text="2016. Cloud."></h1>
+      <p class="type-line" data-text="Services became distributed, so APIs and event streams became the language of software."></p>
+    </section>
+
+    <section class="panel narrative-panel year-detail reveal" aria-label="2020 AI">
+      <h1 class="type-line" data-text="2020. AI."></h1>
+      <p class="type-line" data-text="Language became an interface, and software started interpreting intent instead of only receiving commands."></p>
+    </section>
+
+    <section class="panel narrative-panel year-detail reveal" aria-label="2025 Agent">
+      <h1 class="type-line" data-text="2025. Agent."></h1>
+      <p class="type-line" data-text="Agents began planning, proposing, and executing actions across tools, wallets, and protocols."></p>
+    </section>
+
+    <section class="panel narrative-panel year-detail reveal" aria-label="2026 Agent Economy">
+      <h1 class="type-line" data-text="2026+. Agent Economy."></h1>
+      <p class="type-line" data-text="Agents now need shared context, not just messages, to coordinate economic actions safely."></p>
+    </section>
+
+    <section class="panel narrative-panel agents-slide reveal" aria-label="The future will be full of agents">
+      <h1 class="type-line" data-text="The future won't lack agents. It will be full of them."></h1>
+      <div class="agent-grid" aria-hidden="true">
+        <span>ChatGPT Agent</span><span>Claude Agent</span><span>Wallet Agent</span><span>Trading Agent</span>
+        <span>Research Agent</span><span>Enterprise Agent</span><span>Coding Agent</span><span>Data Agent</span>
+        <span>Security Agent</span><span>Design Agent</span><span>Strategy Agent</span><span>Protocol Agent</span>
       </div>
     </section>
 
-    <section class="deck-shell" aria-label="SuiMesh white presentation narrative">
-      <article class="deck-row deck-multiply">
-        <aside class="deck-index">
-          <strong>01</strong>
-          <h2>Agents are multiplying</h2>
-          <p>From millions today. To billions tomorrow.</p>
-        </aside>
-        <div class="deck-visual growth-visual">
-          <div class="growth-timeline" aria-label="Agent growth timeline">
-            <div class="growth-step tiny"><b>1</b><span>1990s</span><i></i></div>
-            <div class="growth-step small"><b>10</b><span>2000s</span><i></i></div>
-            <div class="growth-step medium"><b>100</b><span>2010s</span><i></i></div>
-            <div class="growth-step large"><b>1,000</b><span>2020</span><i></i></div>
-            <div class="growth-step xlarge"><b>100,000</b><span>2025</span><i></i></div>
-            <div class="growth-step xxlarge"><b>1,000,000</b><span>2026+</span><i></i></div>
-            <div class="growth-step globe"><b>10,000,000+</b><span>The Near Future</span><i></i></div>
-          </div>
-          <p class="deck-callout">Billions of agents. Everywhere.</p>
-        </div>
-      </article>
+    <section class="panel narrative-panel reveal" aria-label="Each agent has private context">
+      <h1 class="type-line" data-text="Each agent has memory, tasks, decisions, and execution capability."></h1>
+      <p class="type-line" data-text="But these capabilities live inside separate products, backends, and databases."></p>
+    </section>
 
-      <article class="deck-row deck-actions">
-        <aside class="deck-index">
-          <strong>02</strong>
-          <h2>Agents are becoming actors</h2>
-          <p>Agents are no longer answering questions. They are taking actions.</p>
-        </aside>
-        <div class="deck-visual action-visual">
-          <div class="action-card"><b>Transfer</b><i>↔</i><span>Move value</span></div>
-          <div class="action-card"><b>Trade</b><i>▥</i><span>Execute trades</span></div>
-          <div class="action-card"><b>Sign</b><i>⌁</i><span>Authorize</span></div>
-          <div class="action-card"><b>Execute</b><i>&lt;/&gt;</i><span>Run actions</span></div>
-          <div class="action-card"><b>Manage assets</b><i>◔</i><span>Allocate & rebalance</span></div>
-          <div class="action-card"><b>Deploy</b><i>□</i><span>Deploy contracts</span></div>
-          <div class="motion-river" aria-hidden="true"></div>
-        </div>
-      </article>
+    <section class="panel narrative-panel lost-slide reveal" aria-label="Every Agent remembers, no Agent shares">
+      <h1 class="type-line" data-text="Every Agent remembers. No Agent shares."></h1>
+      <div class="lost-network" aria-hidden="true">
+        <span>Context Lost</span><span>Context Lost</span><span>Context Lost</span><span>Context Lost</span>
+      </div>
+    </section>
 
-      <article class="deck-row deck-crisis">
-        <aside class="deck-index">
-          <strong>03</strong>
-          <h2>The verification crisis</h2>
-          <p>When agents act, verification becomes a problem.</p>
-        </aside>
-        <div class="deck-visual crisis-visual">
-          <div class="question-core">?</div>
-          <div class="crisis-node node-left-top">Who requested it?</div>
-          <div class="crisis-node node-left-bottom">Who approved it?</div>
-          <div class="crisis-node node-right-top">Who executed it?</div>
-          <div class="crisis-node node-right-bottom">Who can verify it?</div>
-        </div>
-      </article>
+    <section class="panel narrative-panel reveal" aria-label="Context trapped">
+      <h1 class="type-line" data-text="Context is trapped inside products."></h1>
+      <p class="type-line" data-text="Conversation, memory, task history, and audit trails rarely survive across clients."></p>
+    </section>
 
-      <article class="deck-row deck-cost">
-        <aside class="deck-index">
-          <strong>04</strong>
-          <h2>The cost of missing context</h2>
-          <p>Trust collapses when context disappears.</p>
-        </aside>
-        <div class="deck-visual cost-visual">
-          <h3>$500,000 <span>executed</span></h3>
-          <div class="unknown-grid">
-            <div><b>Approval</b><span>unknown</span></div>
-            <div><b>Agent</b><span>unknown</span></div>
-            <div><b>Intent</b><span>unknown</span></div>
-            <div><b>Reason</b><span>unknown</span></div>
-          </div>
-        </div>
-      </article>
+    <section class="panel narrative-panel reveal" aria-label="Execution history fragmented">
+      <h1 class="type-line" data-text="Execution history is fragmented."></h1>
+      <p class="type-line" data-text="Messages, proposals, policy decisions, transactions, and final reports are stored in different places."></p>
+    </section>
 
-      <article class="deck-row deck-fragmented">
-        <aside class="deck-index">
-          <strong>05</strong>
-          <h2>Today’s infrastructure is fragmented</h2>
-          <p>Actions happen everywhere. Context lives nowhere.</p>
-        </aside>
-        <div class="deck-visual fragment-visual">
-          <div class="fragment-center">Context disappears<br>between systems.</div>
-          <div class="fragment-island island-chat">Chat platforms</div>
-          <div class="fragment-island island-agent">Agent systems</div>
-          <div class="fragment-island island-wallet">Wallets & payments</div>
-          <div class="fragment-island island-db">Databases</div>
-          <div class="fragment-island island-audit">Audit logs & monitoring</div>
-        </div>
-      </article>
+    <section class="panel narrative-panel case-slide reveal" aria-label="The action happened but the context is gone">
+      <h1 class="type-line" data-text="The action happened. But the context is gone."></h1>
+      <div class="case-chain" aria-hidden="true">
+        <span>Research Agent</span><span>Trading Agent</span><span>Wallet Agent</span><span>Enterprise Agent</span><strong>WHY? UNKNOWN</strong>
+      </div>
+    </section>
 
-      <article class="deck-row deck-thesis">
-        <aside class="deck-index">
-          <strong>06</strong>
-          <h2>Core judgment</h2>
-          <p>Not a feature list. A shift in infrastructure.</p>
-        </aside>
-        <div class="deck-visual thesis-visual">
-          <h2>When agents become actors,<br>verification becomes <span>infrastructure.</span></h2>
-          <p>当 Agent 成为行动主体，验证与通信将成为基础设施。</p>
-        </div>
-      </article>
+    <section class="panel narrative-panel reveal" aria-label="Verification is not enough">
+      <h1 class="type-line" data-text="A nice summary is not enough when money, permissions, or contract state are involved."></h1>
+      <p class="type-line" data-text="Agent summaries are prose. Economic actions need inspectable facts."></p>
+    </section>
 
-      <article class="deck-row deck-suimesh">
-        <aside class="deck-index brand-index">
-          <strong>07</strong>
-          <img src="assets/suimesh-lockup-hd.png" alt="SuiMesh">
-          <p>The verification layer for agent actions. Own the Context. Verify the Action.</p>
-        </aside>
-        <div class="deck-visual compare-visual">
-          <div class="compare-block without">
-            <h3>Without SuiMesh</h3>
-            <div class="verify-chain">
-              <span>Intent</span><span>Approval</span><span>Execution</span><span>Receipt</span>
-            </div>
-            <p>Unknown. Unknown. Unknown. Unknown.</p>
-          </div>
-          <div class="compare-block with">
-            <h3>With SuiMesh</h3>
-            <div class="verify-chain">
-              <span>Intent</span><span>Proposal</span><span>Approval</span><span>Execution</span><span>Receipt</span><span>Verification</span>
-            </div>
-            <p>End-to-end context. On-chain verification.</p>
-          </div>
-        </div>
-      </article>
+    <section class="panel narrative-panel context-slide reveal" aria-label="Communication is context">
+      <h1 class="type-line" data-text="Communication is no longer messages. It is context."></h1>
+      <div class="context-terms" aria-hidden="true">
+        <span>Intent</span><span>Proposal</span><span>Policy</span><span>Execution</span><span>Receipt</span><span>Audit</span>
+      </div>
+    </section>
 
-      <article class="deck-row deck-future">
-        <aside class="deck-index">
-          <strong>08</strong>
-          <h2>The future</h2>
-          <p>The Internet connected computers. SuiMesh verifies agents.</p>
-          <b>The foundation of the agent economy.</b>
-        </aside>
-        <div class="deck-visual future-visual">
-          <div class="network-globe" aria-hidden="true"></div>
-          <span class="net-label label-human">Agent ↔ Human</span>
-          <span class="net-label label-agent">Agent ↔ Agent</span>
-          <span class="net-label label-protocol">Agent ↔ Protocol</span>
-          <span class="net-label label-enterprise">Agent ↔ Enterprise</span>
-        </div>
-      </article>
+    <section class="panel narrative-panel reveal" aria-label="Without shared context no economy">
+      <h1 class="type-line" data-text="Without shared context, there is no agent economy."></h1>
+      <p class="type-line" data-text="Agents cannot coordinate trust if the state of the action disappears between systems."></p>
+    </section>
+
+    <section class="panel narrative-panel infrastructure-slide reveal" aria-label="Communication becomes infrastructure">
+      <h1 class="type-line" data-text="When Agents become actors, communication becomes infrastructure."></h1>
+      <div class="earth-rise" aria-hidden="true"></div>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="Protocol analogy">
+      <h1 class="type-line" data-text="TCP/IP enabled computers. HTTP enabled the web. SMTP enabled email."></h1>
+      <p class="type-line" data-text="The agent era needs a communication layer for actions."></p>
+    </section>
+
+    <section class="panel narrative-panel suimesh-slide reveal" aria-label="This is SuiMesh">
+      <h1 class="type-line" data-text="This is SuiMesh, the communication layer for agent actions."></h1>
+      <div class="suimesh-hub" aria-hidden="true">
+        <img src="assets/suimesh-symbol-clean.png" alt="">
+        <span>Shared Communication State</span>
+      </div>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="What SuiMesh is not">
+      <h1 class="type-line" data-text="SuiMesh is not a chat app, an agent wallet, or a trading bot."></h1>
+      <p class="type-line" data-text="It is the protocol layer that lets apps, wallets, agents, and clients share trusted context."></p>
+    </section>
+
+    <section class="panel narrative-panel context-slide reveal" aria-label="What SuiMesh turns into state">
+      <h1 class="type-line" data-text="SuiMesh turns intents, proposals, PTB actions, policy decisions, receipts, and audits into shared state."></h1>
+      <div class="context-terms" aria-hidden="true">
+        <span>Intent</span><span>Proposal</span><span>PTB</span><span>Policy</span><span>Receipt</span><span>Audit</span>
+      </div>
+    </section>
+
+    <section class="panel narrative-panel path-slide reveal" aria-label="Light path and heavy path">
+      <h1 class="type-line" data-text="Chat is light. Money, permissions, and contract state are heavy."></h1>
+      <p class="type-line" data-text="SuiMesh separates normal conversation from high-stakes action traces."></p>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="Source of truth">
+      <h1 class="type-line" data-text="Agent summary is untrusted. PTB bytes are the source of truth."></h1>
+      <p class="type-line" data-text="Policy approves inspected facts, not prose."></p>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="Walrus Sui Seal">
+      <h1 class="type-line" data-text="Walrus stores the context. Sui proves the trace. Seal controls access."></h1>
+      <p class="type-line" data-text="The result is user-owned, recoverable, and verifiable communication state."></p>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="Recover context">
+      <h1 class="type-line" data-text="A user can recover the same verified trace from another client."></h1>
+      <p class="type-line" data-text="They no longer need one chat app or one backend to remember what happened."></p>
+    </section>
+
+    <section class="panel narrative-panel future-slide reveal" aria-label="The future is collaborative agents">
+      <h1 class="type-line" data-text="The future is collaborative agents. SuiMesh powers their communication."></h1>
+      <div class="future-chain" aria-hidden="true">
+        <span>Research</span><span>Strategy</span><span>Wallet</span><span>Enterprise</span><span>Protocol</span>
+      </div>
+      <div class="future-context" aria-hidden="true">
+        <span>Intent</span><span>Proposal</span><span>Policy</span><span>Execution</span><span>Receipt</span><span>Audit</span>
+      </div>
+    </section>
+
+    <section class="panel narrative-panel reveal" aria-label="Agent economy needs communication">
+      <h1 class="type-line" data-text="The agent economy needs more than intelligence. It needs communication."></h1>
+      <p class="type-line" data-text="Shared context. Verifiable actions. Recoverable history. Auditable accountability."></p>
+    </section>
+
+    <section class="panel narrative-panel ending-slide dark-slide reveal" aria-label="SuiMesh connects agent communication">
+      <img src="assets/suimesh-symbol-clean.png" alt="SuiMesh symbol" class="slide-symbol">
+      <h1 class="type-line" data-text="SuiMesh connects agent communication."></h1>
+      <p class="type-line" data-text="Own the Context. Verify the Action."></p>
     </section>
   </main>
+
+  <button class="language-toggle" type="button" aria-label="Switch to Chinese">中文</button>
 
   <script src="script.js"></script>
 </body>
