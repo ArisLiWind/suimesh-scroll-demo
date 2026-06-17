@@ -1,62 +1,125 @@
 const progress = document.querySelector(".progress span");
 const reveals = [...document.querySelectorAll(".reveal")];
 const languageToggle = document.querySelector(".language-toggle");
+const controlButtons = [...document.querySelectorAll(".control-button")];
 let currentLanguage = "en";
+let activeTypingPanel = null;
+
+const traceCaptions = [
+  "How SuiMesh generates a verifiable receipt.",
+  "Intent. User goal captured.",
+  "Proposal. Agent plan preserved.",
+  "PTB. Execution source recorded.",
+  "Inspect. Facts verified.",
+  "Policy. Decision attached.",
+  "Claim. Executor locked.",
+  "Receipt. Proof generated.",
+  "Every critical action becomes recoverable. Every decision becomes verifiable. Every execution becomes accountable."
+];
+
+const zhTraceCaptions = [
+  "SuiMesh 如何生成可验证回执。",
+  "Intent：捕获用户目标。",
+  "Proposal：保留 Agent 计划。",
+  "PTB：记录执行来源。",
+  "Inspect：验证事实。",
+  "Policy：附加决策。",
+  "Claim：锁定执行者。",
+  "Receipt：生成证明。",
+  "每个关键行动都可恢复，每个决策都可验证，每次执行都可追责。"
+];
 
 const zh = {
   "The Next Communication Layer": "下一代通信层",
+  SuiMesh: "SuiMesh",
   "Own the Context. Verify the Action.": "拥有上下文，验证行动。",
-  "The Internet connected computers. Blockchains connected value.": "互联网连接了计算机，区块链连接了价值。",
-  "Today, agents are becoming actors. A new communication problem is emerging.": "今天，Agent 正在成为行动主体，一个新的通信问题正在出现。",
-  "Every revolution creates a new communication need.": "每一次技术革命，都会创造新的通信需求。",
-  "1996. Internet.": "1996，互联网。",
-  "Computers needed a common way to exchange packets, addresses, and state across networks.": "计算机需要一种通用方式，在网络之间交换数据包、地址和状态。",
-  "2006. Mobile.": "2006，移动互联网。",
-  "People became always online, so communication moved from places to identities and devices.": "人开始始终在线，通信从固定地点转向身份与设备。",
-  "2016. Cloud.": "2016，云。",
-  "Services became distributed, so APIs and event streams became the language of software.": "服务开始分布式运行，API 与事件流成为软件之间的语言。",
-  "2020. AI.": "2020，人工智能。",
-  "Language became an interface, and software started interpreting intent instead of only receiving commands.": "语言成为新的界面，软件开始理解意图，而不只是接收命令。",
-  "2025. Agent.": "2025，Agent。",
-  "Agents began planning, proposing, and executing actions across tools, wallets, and protocols.": "Agent 开始跨工具、钱包和协议进行规划、提案与执行。",
-  "2026+. Agent Economy.": "2026+，Agent 经济。",
-  "Agents now need shared context, not just messages, to coordinate economic actions safely.": "Agent 现在需要共享上下文，而不只是消息，才能安全协作经济行动。",
-  "The future won't lack agents. It will be full of them.": "未来不会缺少 Agent，未来会充满 Agent。",
-  "Each agent has memory, tasks, decisions, and execution capability.": "每个 Agent 都有记忆、任务、决策和执行能力。",
-  "But these capabilities live inside separate products, backends, and databases.": "但这些能力被锁在不同产品、后端和数据库里。",
-  "Every Agent remembers. No Agent shares.": "每个 Agent 都会记忆，但没有 Agent 会共享。",
-  "Context is trapped inside products.": "上下文被困在产品内部。",
-  "Conversation, memory, task history, and audit trails rarely survive across clients.": "对话、记忆、任务历史和审计轨迹很难跨客户端恢复。",
+  "Own the Context.": "拥有上下文。",
+  "Verify the Action.": "验证行动。",
+  "The Internet connected networks.": "互联网连接了网络。",
+  "The Web connected information.": "Web 连接了信息。",
+  "Blockchains connected value.": "区块链连接了价值。",
+  "AI made intelligence accessible.": "AI 让智能变得可访问。",
+  "Today, a new communication challenge is emerging.": "今天，一个新的通信挑战正在出现。",
+  "Today, a new participant is entering the network.": "今天，一个新的参与者正在进入网络。",
+  "Agents.": "Agent。",
+  "As humans and AI agents begin collaborating, communication is no longer just about messages.": "当人类与 AI Agent 开始协作，通信不再只是消息。",
+  "It becomes about context, actions, permissions, and accountability.": "它变成了上下文、行动、权限和责任。",
+  "If agents are going to act on behalf of humans, we need answers to two questions.": "如果 Agent 要代表人类行动，我们必须回答两个问题。",
+  "Who owns the context? Who verifies the action?": "谁拥有上下文？谁验证行动？",
+  "This is where SuiMesh begins.": "这就是 SuiMesh 开始的地方。",
+  "Over four decades, networks expanded what they can carry.": "四十年来，网络不断扩展自己能够承载的东西。",
+  "First networks. Then information. Then value. Then intelligence. And now, agents.": "先是网络，然后是信息，然后是价值，然后是智能。现在，是 Agent。",
+  "Every technological revolution creates a new coordination need.": "每一次技术革命，都会创造新的协作需求。",
+  "Every major computing shift expands what can move across a network.": "每一次重大计算变革，都会扩展网络中可以流动的东西。",
+  "1983": "1983",
+  "1991": "1991",
+  "2009": "2009",
+  "2023": "2023",
+  "2026+": "2026+",
+  "Internet": "互联网",
+  "Web": "Web",
+  "Blockchain": "区块链",
+  "Mobile": "移动互联网",
+  "Cloud": "云",
+  "Networks became connected.": "网络开始连接。",
+  "Information became connected.": "信息开始连接。",
+  "Value became connected.": "价值开始连接。",
+  "Intelligence became accessible.": "智能变得可访问。",
+  "Actions become coordinated across humans and agents.": "行动开始在人类与 Agent 之间协作流动。",
+  "Computers needed to communicate.": "计算机需要通信。",
+  "People needed to communicate.": "人需要通信。",
+  "Services needed to communicate.": "服务需要通信。",
+  "Humans and agents need trusted coordination.": "人类和 Agent 需要可信协作。",
+  "Agents are becoming actors.": "Agent 正在成为行动主体。",
+  "They can plan workflows. They can propose actions. They can use tools. They can execute tasks.": "它们可以规划工作流、提出行动、使用工具、执行任务。",
+  "They can initiate transactions with human approval.": "它们可以在人工批准下发起交易。",
+  "They can plan. They can decide. They can execute. They can transact.": "它们可以规划，可以决策，可以执行，可以交易。",
+  "When actions move across multiple humans, agents, wallets, applications, and protocols, communication becomes infrastructure.": "当行动跨越人类、Agent、钱包、应用和协议，通信就会成为基础设施。",
+  "And when actions move across multiple humans and agents, communication becomes infrastructure.": "当行动跨越多个人类和 Agent，通信就会成为基础设施。",
+  "Who approved this?": "谁批准了它？",
+  "Who executed this?": "谁执行了它？",
+  "What exactly happened?": "到底发生了什么？",
+  "Can you verify it?": "你能验证它吗？",
+  "Today, context is trapped inside products.": "今天，上下文被困在产品内部。",
+  "Conversations, memory, task history, approvals, execution records, and audit trails rarely survive across clients.": "对话、记忆、任务历史、批准、执行记录和审计轨迹很难跨客户端保留。",
   "Execution history is fragmented.": "执行历史是碎片化的。",
-  "Messages, proposals, policy decisions, transactions, and final reports are stored in different places.": "消息、提案、策略决策、交易和最终报告被存放在不同地方。",
+  "Messages, intents, proposals, policy decisions, transactions, receipts, and final reports are stored in different places.": "消息、意图、提案、策略决策、交易、回执和最终报告被存放在不同地方。",
+  "The future will not lack agents. It will be full of them.": "未来不会缺少 Agent，未来会充满 Agent。",
+  "Each agent may have its own memory, tasks, decisions, and execution capability.": "每个 Agent 都可能拥有自己的记忆、任务、决策和执行能力。",
+  "But these capabilities usually live inside separate products, backends, and databases.": "但这些能力通常被锁在不同产品、后端和数据库里。",
+  "Every Agent remembers. Few Agents share.": "每个 Agent 都会记忆，但很少有 Agent 会共享。",
   "The action happened. But the context is gone.": "行动发生了，但上下文消失了。",
+  "Context Fragmented": "上下文碎片化",
+  "Every Action Has a Receipt": "每个行动都有回执",
+  "High-stakes actions become recoverable communication state.": "高风险行动会成为可恢复的通信状态。",
   "A nice summary is not enough when money, permissions, or contract state are involved.": "当涉及资金、权限或合约状态时，一个漂亮总结远远不够。",
   "Agent summaries are prose. Economic actions need inspectable facts.": "Agent 总结只是文字，经济行动需要可检查的事实。",
-  "Communication is no longer messages. It is context.": "通信不再只是消息，而是上下文。",
   "Without shared context, there is no agent economy.": "没有共享上下文，就没有 Agent 经济。",
-  "Agents cannot coordinate trust if the state of the action disappears between systems.": "如果行动状态在系统之间消失，Agent 就无法协作建立信任。",
-  "When Agents become actors, communication becomes infrastructure.": "当 Agent 成为行动主体，通信就会成为基础设施。",
-  "TCP/IP enabled computers. HTTP enabled the web. SMTP enabled email.": "TCP/IP 支撑计算机通信，HTTP 支撑网页通信，SMTP 支撑邮件通信。",
-  "The agent era needs a communication layer for actions.": "Agent 时代需要一个行动通信层。",
-  "This is SuiMesh, the communication layer for agent actions.": "这就是 SuiMesh，Agent 行动的通信层。",
-  "SuiMesh is not a chat app, an agent wallet, or a trading bot.": "SuiMesh 不是聊天应用、Agent 钱包或交易机器人。",
+  "This is SuiMesh. The communication layer for agent actions.": "这就是 SuiMesh，Agent 行动的通信层。",
+  "SuiMesh is not a chat app. Not an agent wallet. Not a trading bot.": "SuiMesh 不是聊天应用，不是 Agent 钱包，也不是交易机器人。",
   "It is the protocol layer that lets apps, wallets, agents, and clients share trusted context.": "它是让应用、钱包、Agent 和客户端共享可信上下文的协议层。",
-  "SuiMesh turns intents, proposals, PTB actions, policy decisions, receipts, and audits into shared state.": "SuiMesh 将意图、提案、PTB 行动、策略决策、回执和审计转化为共享状态。",
-  "Chat is light. Money, permissions, and contract state are heavy.": "聊天是轻路径，资金、权限和合约状态是重路径。",
-  "SuiMesh separates normal conversation from high-stakes action traces.": "SuiMesh 将普通对话与高风险行动轨迹分离。",
-  "Agent summary is untrusted. PTB bytes are the source of truth.": "Agent 总结不可信，PTB 字节才是真相来源。",
-  "Policy approves inspected facts, not prose.": "策略批准的是被检查过的事实，而不是文字描述。",
+  "Heavy Action Trace": "重行动轨迹",
+  "High-stakes actions become recoverable communication state, not hidden backend logs.": "高风险行动会成为可恢复的通信状态，而不是隐藏的后端日志。",
+  "SuiMesh turns actions into a verifiable lifecycle.": "SuiMesh 将行动转化为可验证生命周期。",
+  "SuiMesh separates normal conversation from high-stakes actions.": "SuiMesh 将普通对话与高风险行动分离。",
+  "Light Path: UserMessage. AgentMessage. MemoryReceipt.": "轻路径：UserMessage，AgentMessage，MemoryReceipt。",
+  "Heavy Path: Intent. Proposal. SuiPtbAction. Inspect. Simulate. PolicyDecision. ActionClaim. ExecutionReceipt. AuditEvent.": "重路径：Intent，Proposal，SuiPtbAction，Inspect，Simulate，PolicyDecision，ActionClaim，ExecutionReceipt，AuditEvent。",
+  "Agent summary is not enough. PTB bytes are the source of truth.": "Agent 总结不够，PTB 字节才是真相来源。",
+  "Manifest must match inspected PTB facts. Policy approves facts, not prose.": "Manifest 必须匹配被检查的 PTB 事实，策略批准事实，而不是文字。",
+  "SuiMesh turns agent actions into shared state.": "SuiMesh 将 Agent 行动转化为共享状态。",
   "Walrus stores the context. Sui proves the trace. Seal controls access.": "Walrus 存储上下文，Sui 证明轨迹，Seal 控制访问。",
-  "The result is user-owned, recoverable, and verifiable communication state.": "最终形成用户拥有、可恢复、可验证的通信状态。",
   "A user can recover the same verified trace from another client.": "用户可以从另一个客户端恢复同一条已验证轨迹。",
   "They no longer need one chat app or one backend to remember what happened.": "他们不再需要依赖某个聊天应用或后端来记住发生了什么。",
-  "The future is collaborative agents. SuiMesh powers their communication.": "未来属于协作型 Agent，SuiMesh 为它们提供通信能力。",
+  "The future is multi-agent coordination.": "未来是多 Agent 协调。",
   "The agent economy needs more than intelligence. It needs communication.": "Agent 经济需要的不只是智能，它需要通信。",
   "Shared context. Verifiable actions. Recoverable history. Auditable accountability.": "共享上下文，可验证行动，可恢复历史，可审计责任。",
-  "SuiMesh connects agent communication.": "SuiMesh 连接 Agent 通信。",
-  Internet: "互联网",
-  Mobile: "移动",
-  Cloud: "云",
+  "Build agents that others can trust.": "构建让其他人可以信任的 Agent。",
+  "Integrate the SuiMesh SDK. Make your agent's actions trusted across agents, wallets, applications, and protocols.": "集成 SuiMesh SDK，让你的 Agent 行动在 Agent、钱包、应用和协议之间可信。",
+  "Search SuiMesh.link": "搜索 SuiMesh.link",
+  "Use SuiMesh SDK.": "Use SuiMesh SDK。",
+  "Use SuiMesh SDK": "Use SuiMesh SDK",
+  "Official site repo": "官网仓库",
+  "Protocol repo": "协议仓库",
   AI: "AI",
   Agent: "Agent",
   "Agent Economy": "Agent 经济",
@@ -86,11 +149,64 @@ const zh = {
   Execution: "执行",
   Receipt: "回执",
   Audit: "审计",
-  "Shared Communication State": "共享通信状态"
+  "Shared Communication State": "共享通信状态",
+  Proposal: "提案",
+  Approval: "批准",
+  Backend: "后端",
+  Wallet: "钱包",
+  Chain: "链上",
+  Logs: "日志",
+  Database: "数据库",
+  Missing: "缺失",
+  Claim: "声明",
+  Walrus: "Walrus",
+  Sui: "Sui",
+  Transaction: "交易",
+  Executor: "执行者",
+  "Alice Wallet": "Alice 钱包",
+  "Transfer < 1000 USDC": "转账 < 1000 USDC",
+  Timestamp: "时间戳",
+  Status: "状态",
+  Executed: "已执行",
+  Verify: "验证",
+  "user goal": "用户目标",
+  "agent plan": "Agent 计划",
+  "source of truth": "真相来源",
+  facts: "事实",
+  decision: "决策",
+  "executor lock": "执行者锁定",
+  "execution proof": "执行证明",
+  "encrypted details and audit archive": "加密细节与审计归档",
+  "refs, hashes, status, claim state": "引用、哈希、状态、声明状态"
 };
 
 function translate(text) {
   return currentLanguage === "zh" ? zh[text] || text : text;
+}
+
+function allPanels() {
+  return [...document.querySelectorAll(".panel")];
+}
+
+function narrativePanels() {
+  return [...document.querySelectorAll(".narrative-panel")];
+}
+
+function getCurrentPanel() {
+  const viewportCenter = window.innerHeight / 2;
+  return allPanels().reduce((best, panel) => {
+    const rect = panel.getBoundingClientRect();
+    const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
+    if (!best || distance < best.distance) return { panel, distance };
+    return best;
+  }, null)?.panel;
+}
+
+function scrollToPanel(panel) {
+  if (!panel) return;
+  panel.classList.add("is-visible");
+  panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.setTimeout(startVisiblePanels, 420);
 }
 
 function updateProgress() {
@@ -114,42 +230,83 @@ function clearTyping(line) {
   line.dataset.typed = "false";
 }
 
-function typeText(line, force = false) {
-  if (!force && line.dataset.typed === "true") return;
+function typeText(line) {
+  return new Promise((resolve) => {
+    if (line.dataset.typed === "true") {
+      resolve();
+      return;
+    }
 
-  if (!line.dataset.en) {
-    line.dataset.en = line.dataset.text || line.textContent.trim();
+    if (!line.dataset.en) {
+      line.dataset.en = line.dataset.text || line.textContent.trim();
+    }
+
+    clearTyping(line);
+
+    const text = translate(line.dataset.en);
+    line.textContent = "";
+    line.dataset.typed = "true";
+    line.classList.add("is-typing");
+
+    const delay = Number.parseInt(line.dataset.delay || "0", 10);
+
+    line._typingDelay = window.setTimeout(() => {
+      let index = 0;
+      const speed = text.length > 72 ? 42 : text.length > 38 ? 50 : 62;
+      line._typingTimer = window.setInterval(() => {
+        line.textContent = text.slice(0, index + 1);
+        index += 1;
+        if (index >= text.length) {
+          window.clearInterval(line._typingTimer);
+          line._typingTimer = null;
+          line.classList.remove("is-typing");
+          line.classList.add("is-typed");
+          window.setTimeout(resolve, 520);
+        }
+      }, speed);
+    }, delay);
+  });
+}
+
+function resetPanel(panel) {
+  panel.dataset.panelTyped = "false";
+  panel.querySelectorAll(".type-line").forEach((line) => {
+    clearTyping(line);
+    line.textContent = "";
+  });
+}
+
+function completePanel(panel) {
+  panel.querySelectorAll(".type-line").forEach((line) => {
+    if (!line.dataset.en) line.dataset.en = line.dataset.text || line.textContent.trim();
+    clearTyping(line);
+    line.textContent = translate(line.dataset.en);
+    line.dataset.typed = "true";
+    line.classList.add("is-typed");
+  });
+  panel.dataset.panelTyped = "true";
+  if (activeTypingPanel === panel) activeTypingPanel = null;
+}
+
+async function typePanel(panel, force = false) {
+  if (activeTypingPanel && activeTypingPanel !== panel) return;
+  if (!force && panel.dataset.panelTyped === "true") return;
+
+  activeTypingPanel = panel;
+  panel.dataset.panelTyped = "typing";
+
+  const lines = [...panel.querySelectorAll(".type-line")];
+  for (const line of lines) {
+    await typeText(line);
   }
 
-  clearTyping(line);
-
-  const text = translate(line.dataset.en);
-  line.textContent = "";
-  line.dataset.typed = "true";
-  line.classList.add("is-typing");
-
-  const baseDelay = Number.parseInt(line.closest("[style*='--delay']")?.style.getPropertyValue("--delay"), 10) || 0;
-  const lineIndex = [...line.closest(".panel").querySelectorAll(".type-line")].indexOf(line);
-  const delay = baseDelay + lineIndex * 220;
-
-  line._typingDelay = window.setTimeout(() => {
-    let index = 0;
-    const speed = text.length > 45 ? 22 : 30;
-    line._typingTimer = window.setInterval(() => {
-      line.textContent = text.slice(0, index + 1);
-      index += 1;
-      if (index >= text.length) {
-        window.clearInterval(line._typingTimer);
-        line._typingTimer = null;
-        line.classList.remove("is-typing");
-        line.classList.add("is-typed");
-      }
-    }, speed);
-  }, delay);
+  panel.dataset.panelTyped = "true";
+  activeTypingPanel = null;
+  startVisiblePanels();
 }
 
 function prepareStaticLabels() {
-  document.querySelectorAll(".timeline-track i, .agent-grid span, .lost-network span, .case-chain span, .case-chain strong, .context-terms span, .future-chain span, .future-context span, .suimesh-hub span").forEach((node) => {
+  document.querySelectorAll(".timeline-track i, .agent-grid span, .lost-network span, .case-chain span, .case-chain strong, .context-terms span, .future-chain span, .future-context span, .suimesh-hub span, .trace-flow b, .trace-flow span, .fragment-list b, .fragment-list i, .receipt-card strong, .receipt-card dt, .receipt-card dd, .preview-body strong, .preview-body p, .preview-body a, .repo-links a").forEach((node) => {
     if (!node.dataset.en) node.dataset.en = node.textContent.trim();
     node.textContent = translate(node.dataset.en);
   });
@@ -163,13 +320,63 @@ function applyLanguage() {
   }
   prepareStaticLabels();
   document.querySelectorAll(".type-line").forEach((line) => {
-    if (line.closest(".is-visible")) {
-      typeText(line, true);
-    } else {
-      clearTyping(line);
-      line.textContent = "";
-    }
+    clearTyping(line);
+    line.textContent = "";
   });
+  narrativePanels().forEach((panel) => {
+    panel.dataset.panelTyped = "false";
+  });
+  document.querySelectorAll(".heavy-trace-slide").forEach((panel) => setTraceStep(panel, Number.parseInt(panel.dataset.traceStep || "0", 10)));
+  activeTypingPanel = null;
+  startVisiblePanels();
+}
+
+function startVisiblePanels() {
+  if (activeTypingPanel) return;
+  const currentPanel = getCurrentPanel();
+  if (!currentPanel?.classList.contains("narrative-panel")) return;
+  currentPanel.classList.add("is-visible");
+  if (currentPanel.dataset.panelTyped !== "true") typePanel(currentPanel);
+}
+
+function setTraceStep(panel, step) {
+  const safeStep = Math.max(0, Math.min(step, traceCaptions.length - 1));
+  panel.dataset.traceStep = String(safeStep);
+  panel.querySelectorAll("[data-step]").forEach((node) => {
+    const nodeStep = Number.parseInt(node.dataset.step, 10);
+    node.classList.toggle("is-active", nodeStep <= safeStep);
+    node.classList.toggle("is-current", nodeStep === safeStep);
+  });
+  const caption = panel.querySelector(".trace-caption");
+  if (caption) caption.textContent = currentLanguage === "zh" ? zhTraceCaptions[safeStep] : traceCaptions[safeStep];
+}
+
+function advanceTrace(panel) {
+  if (panel.dataset.panelTyped !== "true") return;
+  const current = Number.parseInt(panel.dataset.traceStep || "0", 10);
+  setTraceStep(panel, current + 1);
+}
+
+function movePanel(direction) {
+  const panels = allPanels();
+  const current = getCurrentPanel();
+  const index = Math.max(0, panels.indexOf(current));
+  if (direction === "next") {
+    if (current?.classList.contains("narrative-panel") && current.dataset.panelTyped !== "true") {
+      completePanel(current);
+      return;
+    }
+    if (current?.classList.contains("heavy-trace-slide")) {
+      const step = Number.parseInt(current.dataset.traceStep || "0", 10);
+      if (step < traceCaptions.length - 1) {
+        advanceTrace(current);
+        return;
+      }
+    }
+    scrollToPanel(panels[Math.min(index + 1, panels.length - 1)]);
+    return;
+  }
+  scrollToPanel(panels[Math.max(index - 1, 0)]);
 }
 
 const observer = new IntersectionObserver(
@@ -177,10 +384,10 @@ const observer = new IntersectionObserver(
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add("is-visible");
-      entry.target.querySelectorAll(".type-line").forEach((line) => typeText(line));
+      startVisiblePanels();
     });
   },
-  { threshold: 0.34, rootMargin: "0px 0px -8% 0px" }
+  { threshold: 0.72, rootMargin: "-8% 0px -8% 0px" }
 );
 
 document.querySelectorAll(".type-line").forEach((line) => {
@@ -189,11 +396,26 @@ document.querySelectorAll(".type-line").forEach((line) => {
 prepareStaticLabels();
 reveals.forEach((section) => observer.observe(section));
 
+document.querySelectorAll(".heavy-trace-slide").forEach((panel) => {
+  setTraceStep(panel, 0);
+  panel.addEventListener("click", () => advanceTrace(panel));
+  panel.addEventListener("keydown", (event) => {
+    if (event.key !== " " && event.key !== "Enter" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    advanceTrace(panel);
+  });
+});
+
 languageToggle?.addEventListener("click", () => {
   currentLanguage = currentLanguage === "en" ? "zh" : "en";
   applyLanguage();
 });
 
+controlButtons.forEach((button) => {
+  button.addEventListener("click", () => movePanel(button.dataset.direction));
+});
+
 window.addEventListener("scroll", updateProgress, { passive: true });
+window.addEventListener("scroll", () => window.setTimeout(startVisiblePanels, 120), { passive: true });
 window.addEventListener("resize", updateProgress);
 updateProgress();

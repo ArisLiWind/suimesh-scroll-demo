@@ -1,18 +1,27 @@
 # SuiMesh Scroll Demo
 
-A scroll-driven presentation page for the SuiMesh narrative:
+Scroll-driven presentation demo for SuiMesh: the communication layer for agent actions.
 
-- agents are becoming actors
-- coordination creates verification problems
-- current context is fragmented
-- SuiMesh becomes the communication and audit layer for the agent era
+The narrative moves from computing history to agent coordination, fragmented context, verifiable receipts, protocol mechanics, recoverable state, and a final SDK call to action.
 
 ## Preview
 
-Open `index.html` directly, or run a static server:
+Open `index.html` directly, or run:
 
 ```bash
 python3 -m http.server 4173
 ```
 
 Then visit `http://localhost:4173`.
+
+## Controls
+
+- `中文` toggles Chinese / English copy.
+- `◀` and `▶` move through slides.
+- On the Heavy Action Trace slide, `▶`, click, Enter, Space, or ArrowRight advances the trace animation.
+
+## Links
+
+- Site: https://arisliwind.github.io/SuiMesh/
+- Site repository: https://github.com/ArisLiWind/SuiMesh
+- Protocol repository: https://github.com/mor9x/suimesh
