@@ -2199,32 +2199,32 @@ body {
 .fragment-list span:nth-child(5) { animation-delay: 360ms; }
 
 .receipt-slide {
-  /* AJ modified: maximize text width with flexible left column */
-  width: min(1480px, 100%);
+  /* Keep the main headline at the deck-wide title size without horizontal clipping. */
+  width: min(2500px, 100%);
   margin-inline: auto;
-  grid-template-columns: minmax(560px, 1fr) minmax(340px, 420px);
-  text-align: left;
-  gap: clamp(40px, 4vw, 80px);
+  grid-template-columns: 1fr;
+  text-align: center;
+  gap: clamp(44px, 5vh, 72px);
   justify-content: center;
+  justify-items: center;
   align-items: center;
 }
 
 .receipt-copy {
   display: grid;
-  gap: 24px;
-  justify-items: start;
+  width: min(2200px, 100%);
+  gap: clamp(16px, 2vh, 24px);
+  justify-items: center;
 }
 
 .receipt-copy h1,
 .receipt-copy p {
-  text-align: left;
+  text-align: center;
 }
 
 .receipt-copy h1 {
-  /* AJ modified: force 2 lines max for split headline */
-  max-width: none;
-  font-size: clamp(36px, 3.2vw, 52px);
-  line-height: 1.08;
+  width: auto;
+  max-width: 100%;
   white-space: nowrap;
 }
 
