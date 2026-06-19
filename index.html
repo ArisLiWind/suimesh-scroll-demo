@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SuiMesh Scroll Narrative</title>
   <meta name="description" content="A scroll-driven SuiMesh narrative about the missing communication layer for agent actions.">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=26">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -48,15 +48,18 @@
       <p class="type-line" data-text="Agents."></p>
     </section>
 
-    <section class="panel narrative-panel reveal" aria-label="Two questions">
+    <section class="panel narrative-panel two-question-slide reveal" aria-label="Two questions">
       <h1 class="type-line" data-text="If agents are going to act on behalf of humans, we need answers to two questions."></h1>
-      <p class="type-line" data-text="Who owns the context? Who verifies the action?"></p>
+      <p class="type-line" data-text="Who owns the context?"></p>
+      <p class="type-line" data-text="Who verifies the action?"></p>
       <p class="type-line" data-text="This is where SuiMesh begins."></p>
     </section>
 
-    <section class="panel narrative-panel reveal" aria-label="Network expansion">
+    <section class="panel narrative-panel network-expansion-slide reveal" aria-label="Network expansion">
       <h1 class="type-line" data-text="Over four decades, networks expanded what they can carry."></h1>
-      <p class="type-line" data-text="First networks. Then information. Then value. Then intelligence. And now, agents."></p>
+      <p class="type-line" data-text="First networks."></p>
+      <p class="type-line" data-text="Then information. Then value."></p>
+      <p class="type-line" data-text="Then intelligence. And now, agents."></p>
     </section>
 
     <section class="panel narrative-panel timeline-slide reveal" aria-label="Every major computing shift">
@@ -140,8 +143,52 @@
 
     <section class="panel narrative-panel lost-slide reveal" aria-label="Every Agent remembers, no Agent shares">
       <h1 class="type-line" data-text="Every Agent remembers. Few Agents share."></h1>
-      <div class="lost-network" aria-hidden="true">
-        <span>Context Lost</span><span>Context Lost</span><span>Context Lost</span><span>Context Lost</span>
+      <div class="lost-knowledge-graph" aria-hidden="true">
+        <svg class="lost-kg-lines" viewBox="0 0 1000 520" role="img">
+          <defs>
+            <marker id="kg-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 L2,5 Z" fill="#b8c4d4"/>
+            </marker>
+            <marker id="kg-arrow-broken" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 L2,5 Z" fill="#ff5c5c"/>
+            </marker>
+          </defs>
+          <g class="lost-kg-edges">
+            <!-- healthy edges -->
+            <line x1="500" y1="218" x2="100" y2="230" marker-end="url(#kg-arrow)"></line>
+            <line x1="500" y1="218" x2="220" y2="374" marker-end="url(#kg-arrow)"></line>
+            <line x1="500" y1="218" x2="720" y2="104" marker-end="url(#kg-arrow)"></line>
+            <line x1="500" y1="218" x2="780" y2="234" marker-end="url(#kg-arrow)"></line>
+            <line x1="500" y1="218" x2="920" y2="146" marker-end="url(#kg-arrow)"></line>
+            <line x1="500" y1="218" x2="880" y2="380" marker-end="url(#kg-arrow)"></line>
+            <!-- cross links healthy -->
+            <line x1="250" y1="104" x2="460" y2="68" marker-end="url(#kg-arrow)"></line>
+            <line x1="720" y1="104" x2="920" y2="146" marker-end="url(#kg-arrow)"></line>
+            <!-- broken edges (red) -->
+            <line x1="250" y1="104" x2="500" y2="218" stroke="#ff5c5c" marker-end="url(#kg-arrow-broken)"></line>
+            <line x1="500" y1="218" x2="460" y2="68" stroke="#ff5c5c" marker-end="url(#kg-arrow-broken)"></line>
+            <line x1="500" y1="218" x2="620" y2="354" stroke="#ff5c5c" marker-end="url(#kg-arrow-broken)"></line>
+            <line x1="780" y1="234" x2="880" y2="380" stroke="#ff5c5c" marker-end="url(#kg-arrow-broken)"></line>
+          </g>
+          <!-- broken-edge midpoint alerts -->
+          <g class="lost-kg-alerts">
+            <g transform="translate(375 161)"><circle r="13"/><text y="5">!</text></g>
+            <g transform="translate(480 143)"><circle r="13"/><text y="5">!</text></g>
+            <g transform="translate(560 286)"><circle r="13"/><text y="5">!</text></g>
+            <g transform="translate(830 307)"><circle r="13"/><text y="5">!</text></g>
+          </g>
+        </svg>
+        <span class="lost-kg-node" style="--x: 10%; --y: 44%; --i: 1"><b>Research</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 25%; --y: 20%; --i: 2"><b>Trading</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 22%; --y: 72%; --i: 3"><b>Risk</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 46%; --y: 13%; --i: 4"><b>Compliance</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 50%; --y: 42%; --i: 5"><b>Wallet</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 62%; --y: 68%; --i: 6"><b>Audit</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 72%; --y: 20%; --i: 7"><b>Enterprise</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 78%; --y: 45%; --i: 8"><b>Data</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 92%; --y: 28%; --i: 9"><b>Protocol</b><b>Agent</b></span>
+        <span class="lost-kg-node" style="--x: 88%; --y: 73%; --i: 10"><b>DeFi</b><b>Agent</b></span>
+        <em class="context-lost">Context Lost</em>
       </div>
     </section>
 
@@ -183,18 +230,19 @@
 
     <section class="panel narrative-panel receipt-slide reveal" aria-label="Every Action Has a Receipt">
       <div class="receipt-copy">
-        <h1 class="type-line" data-text="Every Action Has a Receipt"></h1>
-        <p class="type-line" data-text="High-stakes actions become recoverable communication state."></p>
+        <h1 class="type-line" data-text="Every high-stakes action"></h1>
+        <h1 class="type-line" data-text="has a verifiable receipt"></h1>
+        <p class="type-line" data-text="Funds, permissions, and contract state are no longer just chat summaries. They become recoverable, auditable communication state."></p>
       </div>
       <div class="receipt-card" aria-hidden="true">
-        <strong>Transaction</strong>
-        <dl>
-          <dt>Executor</dt><dd>Alice Wallet</dd>
-          <dt>Policy</dt><dd>Transfer &lt; 1000 USDC</dd>
-          <dt>Timestamp</dt><dd>2026-06-17 10:21:33</dd>
-          <dt>Status</dt><dd>Executed</dd>
-          <dt>Verify</dt><dd>✓</dd>
-        </dl>
+        <strong>Action Receipt</strong>
+        <div class="receipt-row"><b>Intent</b><span>Transfer 1000 USDC</span></div>
+        <div class="receipt-row"><b>Proposal</b><span>Prepared by Trading Agent</span></div>
+        <div class="receipt-row"><b>PTB</b><span>0x7a...91f3</span><em>✓ inspected</em></div>
+        <div class="receipt-row"><b>Policy</b><span>Max transfer &lt; 1000 USDC</span><em>✓ approved</em></div>
+        <div class="receipt-row"><b>Claim</b><span>Executor: Alice Wallet</span><em>✓ claimed</em></div>
+        <div class="receipt-row"><b>Execution</b><span>Tx: 0x9c...42ab</span><em>✓ success</em></div>
+        <div class="receipt-row"><b>Audit</b><span>Walrus archive: bafy...</span><span>Sui trace: 0x...</span><em>✓ recoverable</em></div>
       </div>
     </section>
 
@@ -204,15 +252,15 @@
         <p class="type-line" data-text="High-stakes actions become recoverable communication state, not hidden backend logs."></p>
       </div>
       <div class="trace-flow" aria-hidden="true">
-        <div class="trace-node" data-step="1"><b>Intent</b><span>user goal</span></div>
-        <div class="trace-node" data-step="2"><b>Proposal</b><span>agent plan</span></div>
-        <div class="trace-node emphasis-node" data-step="3"><b>PTB</b><span>source of truth</span></div>
-        <div class="trace-node" data-step="4"><b>Inspect</b><span>facts</span></div>
-        <div class="trace-node" data-step="5"><b>Policy</b><span>decision</span></div>
-        <div class="trace-node" data-step="6"><b>Claim</b><span>executor lock</span></div>
-        <div class="trace-node" data-step="7"><b>Receipt</b><span>execution proof</span></div>
-        <div class="trace-branch walrus-branch" data-step="3"><b>Walrus</b><span>encrypted details and audit archive</span></div>
-        <div class="trace-branch sui-branch" data-step="6"><b>Sui</b><span>refs, hashes, status, claim state</span></div>
+        <div class="trace-node" data-step="1"><span class="trace-icon icon-target"></span><b>Intent</b><span>user goal</span></div>
+        <div class="trace-node" data-step="2"><span class="trace-icon icon-doc"></span><b>Proposal</b><span>agent plan</span></div>
+        <div class="trace-node emphasis-node" data-step="3"><span class="trace-icon icon-ptb"></span><b>PTB</b><span>source of truth</span></div>
+        <div class="trace-node" data-step="4"><span class="trace-icon icon-search"></span><b>Inspect</b><span>facts</span></div>
+        <div class="trace-node" data-step="5"><span class="trace-icon icon-shield"></span><b>Policy</b><span>decision</span></div>
+        <div class="trace-node" data-step="6"><span class="trace-icon icon-lock"></span><b>Claim</b><span>executor lock</span></div>
+        <div class="trace-node" data-step="7"><span class="trace-icon icon-receipt"></span><b>Receipt</b><span>execution proof</span></div>
+        <div class="trace-branch walrus-branch" data-step="3"><span class="trace-icon brand-walrus"></span><b>Walrus</b><span>encrypted details and audit archive</span></div>
+        <div class="trace-branch sui-branch" data-step="6"><span class="trace-icon brand-sui"><img src="assets/sui-logo-blue.png" alt=""></span><b>Sui</b><span>refs, hashes, status, claim state</span></div>
       </div>
       <p class="trace-caption" aria-live="polite">Click to walk through the heavy path.</p>
     </section>
@@ -235,7 +283,15 @@
       <p class="type-line" data-text="Manifest must match inspected PTB facts. Policy approves facts, not prose."></p>
     </section>
 
-    <section class="panel narrative-panel context-slide reveal" aria-label="Shared state">
+    <section class="panel narrative-panel context-slide shared-state-slide reveal" aria-label="Shared state">
+      <div class="shared-mark-field" aria-hidden="true">
+        <img src="assets/suimesh-glass-mark.png" alt="">
+        <img src="assets/suimesh-glass-mark.png" alt="">
+        <img src="assets/suimesh-glass-mark.png" alt="">
+        <img src="assets/suimesh-glass-mark.png" alt="">
+        <img src="assets/suimesh-glass-mark.png" alt="">
+        <img src="assets/suimesh-glass-mark.png" alt="">
+      </div>
       <h1 class="type-line" data-text="SuiMesh turns agent actions into shared state."></h1>
       <div class="context-terms" aria-hidden="true">
         <span>Intent</span><span>Proposal</span><span>PTB</span><span>Policy</span><span>Receipt</span><span>Audit</span>
@@ -268,6 +324,7 @@
 
     <section class="panel narrative-panel ending-slide reveal" aria-label="Build agents that others can trust">
       <img src="assets/suimesh-symbol-clean.png" alt="SuiMesh symbol" class="cta-mark">
+      <h1 class="type-line cta-protocol" data-text="SuiMesh"></h1>
       <h1 class="type-line" data-text="Build agents that others can trust."></h1>
       <p class="type-line" data-text="Integrate the SuiMesh SDK. Make your agent's actions trusted across agents, wallets, applications, and protocols."></p>
       <p class="type-line" data-text="Own the Context. Verify the Action."></p>
@@ -282,19 +339,15 @@
       <div class="site-preview" aria-hidden="true">
         <div class="preview-bar">
           <span></span><span></span><span></span>
-          <b>arisliwind.github.io/SuiMesh/</b>
+          <b>SuiMesh.link</b>
         </div>
         <div class="preview-body">
           <img src="assets/suimesh-site-preview.png" alt="">
-          <a href="https://arisliwind.github.io/SuiMesh/" target="_blank" rel="noreferrer">Use SuiMesh SDK</a>
+          <a href="https://arisliwind.github.io/SuiMesh/" target="_blank" rel="noreferrer">Use SuiMesh v0.1 SDK</a>
           <span class="cursor-pointer"></span>
         </div>
       </div>
-      <div class="repo-links">
-        <a href="https://github.com/ArisLiWind/SuiMesh" target="_blank" rel="noreferrer">Official site repo</a>
-        <a href="https://github.com/mor9x/suimesh" target="_blank" rel="noreferrer">Protocol repo</a>
-      </div>
-      <p class="type-line" data-text="Use SuiMesh SDK."></p>
+      <p class="sdk-callout"><span>Use</span> <strong>SuiMesh v0.1</strong> <span>SDK.</span></p>
     </section>
   </main>
 

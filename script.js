@@ -46,9 +46,14 @@ const zh = {
   "It becomes about context, actions, permissions, and accountability.": "它变成了上下文、行动、权限和责任。",
   "If agents are going to act on behalf of humans, we need answers to two questions.": "如果 Agent 要代表人类行动，我们必须回答两个问题。",
   "Who owns the context? Who verifies the action?": "谁拥有上下文？谁验证行动？",
+  "Who owns the context?": "谁拥有上下文？",
+  "Who verifies the action?": "谁验证行动？",
   "This is where SuiMesh begins.": "这就是 SuiMesh 开始的地方。",
   "Over four decades, networks expanded what they can carry.": "四十年来，网络不断扩展自己能够承载的东西。",
   "First networks. Then information. Then value. Then intelligence. And now, agents.": "先是网络，然后是信息，然后是价值，然后是智能。现在，是 Agent。",
+  "First networks.": "先是网络。",
+  "Then information. Then value.": "然后是信息，然后是价值。",
+  "Then intelligence. And now, agents.": "然后是智能。现在，是 Agent。",
   "Every technological revolution creates a new coordination need.": "每一次技术革命，都会创造新的协作需求。",
   "Every major computing shift expands what can move across a network.": "每一次重大计算变革，都会扩展网络中可以流动的东西。",
   "1983": "1983",
@@ -92,6 +97,8 @@ const zh = {
   "Context Fragmented": "上下文碎片化",
   "Every Action Has a Receipt": "每个行动都有回执",
   "High-stakes actions become recoverable communication state.": "高风险行动会成为可恢复的通信状态。",
+  "Every high-stakes action has a verifiable receipt": "每个高风险行动都有可验证回执",
+  "Funds, permissions, and contract state are no longer just chat summaries. They become recoverable, auditable communication state.": "资金、权限与合约状态不再只是聊天总结，而是可恢复、可审计的通信状态。",
   "A nice summary is not enough when money, permissions, or contract state are involved.": "当涉及资金、权限或合约状态时，一个漂亮总结远远不够。",
   "Agent summaries are prose. Economic actions need inspectable facts.": "Agent 总结只是文字，经济行动需要可检查的事实。",
   "Without shared context, there is no agent economy.": "没有共享上下文，就没有 Agent 经济。",
@@ -118,6 +125,8 @@ const zh = {
   "Search SuiMesh.link": "搜索 SuiMesh.link",
   "Use SuiMesh SDK.": "Use SuiMesh SDK。",
   "Use SuiMesh SDK": "Use SuiMesh SDK",
+  "Use SuiMesh v0.1 SDK.": "Use SuiMesh v0.1 SDK。",
+  "Use SuiMesh v0.1 SDK": "Use SuiMesh v0.1 SDK",
   "Official site repo": "官网仓库",
   "Protocol repo": "协议仓库",
   AI: "AI",
@@ -135,12 +144,21 @@ const zh = {
   "Design Agent": "设计 Agent",
   "Strategy Agent": "策略 Agent",
   "Protocol Agent": "协议 Agent",
+  "Risk Agent": "风控 Agent",
+  "Compliance Agent": "合规 Agent",
+  "Audit Agent": "审计 Agent",
+  "DeFi Agent": "DeFi Agent",
   "Context Lost": "上下文丢失",
   "Research": "研究",
   "Strategy": "策略",
   "Wallet": "钱包",
   "Enterprise": "企业",
   "Protocol": "协议",
+  "Research-Agent": "研究 Agent",
+  "Strategy-Agent": "策略 Agent",
+  "Wallet-Agent": "钱包 Agent",
+  "Enterprise-Agent": "企业 Agent",
+  "Protocol-Agent": "协议 Agent",
   "WHY? UNKNOWN": "为什么？未知",
   Intent: "意图",
   Proposal: "提案",
@@ -162,9 +180,23 @@ const zh = {
   Walrus: "Walrus",
   Sui: "Sui",
   Transaction: "交易",
+  "Action Receipt": "行动回执",
   Executor: "执行者",
   "Alice Wallet": "Alice 钱包",
   "Transfer < 1000 USDC": "转账 < 1000 USDC",
+  "Transfer 1000 USDC": "转账 1000 USDC",
+  "Prepared by Trading Agent": "Trading Agent 生成",
+  "0x7a...91f3": "0x7a...91f3",
+  "✓ inspected": "✓ 已检查",
+  "Max transfer < 1000 USDC": "单笔转账 ≤ 1000 USDC",
+  "✓ approved": "✓ 已通过",
+  "Executor: Alice Wallet": "Alice 钱包",
+  "✓ claimed": "✓ 已认领",
+  "Tx: 0x9c...42ab": "Tx: 0x9c...42ab",
+  "✓ success": "✓ 成功",
+  "Walrus archive: bafy...": "Walrus Archive: bafy...",
+  "Sui trace: 0x...": "Sui Trace: 0x...",
+  "✓ recoverable": "✓ 可恢复",
   Timestamp: "时间戳",
   Status: "状态",
   Executed: "已执行",
@@ -182,6 +214,33 @@ const zh = {
 
 function translate(text) {
   return currentLanguage === "zh" ? zh[text] || text : text;
+}
+
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function decorateTypedLine(line) {
+  if (!line.closest(".network-expansion-slide")) return;
+  const text = translate(line.dataset.en || line.dataset.text || line.textContent.trim());
+  const terms = currentLanguage === "zh"
+    ? ["网络", "信息", "价值", "智能", "Agent"]
+    : ["networks", "information", "value", "intelligence", "agents"];
+  let html = escapeHtml(text);
+  terms.forEach((term) => {
+    html = html.replace(new RegExp(escapeRegExp(term), "gi"), (match) => `<strong class="keyword">${match}</strong>`);
+  });
+  line.innerHTML = html;
 }
 
 function allPanels() {
@@ -261,6 +320,7 @@ function typeText(line) {
           line._typingTimer = null;
           line.classList.remove("is-typing");
           line.classList.add("is-typed");
+          decorateTypedLine(line);
           window.setTimeout(resolve, 520);
         }
       }, speed);
@@ -281,6 +341,7 @@ function completePanel(panel) {
     if (!line.dataset.en) line.dataset.en = line.dataset.text || line.textContent.trim();
     clearTyping(line);
     line.textContent = translate(line.dataset.en);
+    decorateTypedLine(line);
     line.dataset.typed = "true";
     line.classList.add("is-typed");
   });
@@ -306,7 +367,7 @@ async function typePanel(panel, force = false) {
 }
 
 function prepareStaticLabels() {
-  document.querySelectorAll(".timeline-track i, .agent-grid span, .lost-network span, .case-chain span, .case-chain strong, .context-terms span, .future-chain span, .future-context span, .suimesh-hub span, .trace-flow b, .trace-flow span, .fragment-list b, .fragment-list i, .receipt-card strong, .receipt-card dt, .receipt-card dd, .preview-body strong, .preview-body p, .preview-body a, .repo-links a").forEach((node) => {
+  document.querySelectorAll(".timeline-track i, .agent-grid span, .lost-network span, .lost-network em, .case-chain span, .case-chain strong, .context-terms span, .future-chain span, .future-context span, .suimesh-hub span, .trace-flow b, .trace-flow span, .fragment-list b, .fragment-list i, .receipt-card strong, .receipt-card b, .receipt-card span, .receipt-card em, .preview-body strong, .preview-body p, .preview-body a, .repo-links a, .cta-protocol").forEach((node) => {
     if (!node.dataset.en) node.dataset.en = node.textContent.trim();
     node.textContent = translate(node.dataset.en);
   });
