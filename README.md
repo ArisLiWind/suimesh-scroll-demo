@@ -2,8 +2,6 @@
 
 > Scroll-driven presentation demo for **SuiMesh** — the communication layer for agent actions.
 
-🚀 **Live Preview:** [https://arisliwind.github.io/suimesh-scroll-demo/](https://arisliwind.github.io/suimesh-scroll-demo/)
-
 ---
 
 ## What is this?
@@ -24,10 +22,7 @@ The experience is bilingual (`中文` toggles Chinese / English) and supports bo
 
 ## Quick Start
 
-### 1. Open the live demo
-👉 **[https://arisliwind.github.io/suimesh-scroll-demo/](https://arisliwind.github.io/suimesh-scroll-demo/)**
-
-### 2. Or run locally
+### Run locally
 ```bash
 cd suimesh-scroll-demo
 python3 -m http.server 4173
@@ -77,8 +72,6 @@ suimesh-scroll-demo/
 
 ## Links
 
-- 🔗 **Live Demo:** https://arisliwind.github.io/suimesh-scroll-demo/
 - 🌐 **Main Site:** https://arisliwind.github.io/SuiMesh/
 - 📦 **Site Repo:** https://github.com/ArisLiWind/SuiMesh
 - 🔧 **Protocol Repo:** https://github.com/mor9x/suimesh
-
